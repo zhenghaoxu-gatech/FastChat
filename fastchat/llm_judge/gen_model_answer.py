@@ -94,6 +94,7 @@ def get_model_answers(
         cpu_offloading=False,
         debug=False,
     )
+    model.generation_config.pad_token_id = tokenizer.pad_token_id
 
     for question in tqdm(questions):
         if question["category"] in temperature_config:
