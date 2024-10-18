@@ -121,12 +121,21 @@ def get_model_answers(
 
                 # some models may error out when generating long outputs
                 try:
-                    output_ids = model.generate(
+                    if model_path == "nvidia/Mistral-NeMo-Minitron-8B-Instruct": 
+                        output_ids = model.generate(
                         torch.as_tensor(input_ids).cuda(),
                         do_sample=do_sample,
                         temperature=temperature,
                         max_new_tokens=max_new_token,
+                        stop_strings=["<extra_id_1>"],
                     )
+                    else: 
+                        output_ids = model.generate(
+                            torch.as_tensor(input_ids).cuda(),
+                            do_sample=do_sample,
+                            temperature=temperature,
+                            max_new_tokens=max_new_token,
+                        )
                     if model.config.is_encoder_decoder:
                         output_ids = output_ids[0]
                     else:
