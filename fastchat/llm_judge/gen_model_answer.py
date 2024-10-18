@@ -128,6 +128,7 @@ def get_model_answers(
                         temperature=temperature,
                         max_new_tokens=max_new_token,
                         stop_strings=["<extra_id_1>"],
+                        tokenizer=tokenizer,
                     )
                     else: 
                         output_ids = model.generate(
